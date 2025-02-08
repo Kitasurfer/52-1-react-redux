@@ -1,27 +1,38 @@
-import React, { useState } from "react";
-import { CounterProps } from "./types";
-import { CounterWrapper, CounterTitle, CounterButtons, CounterButton } from "./styles";
+import Button from "../Button/Button";
+import { ButtonWrapper, CounterWrapper, ResultContainer } from "./styles";
+//9. Импортируем хуки для диспатча и получения данных (селекторов)
+import { useAppDispatch, useAppSelector } from "store/hooks";
+//10. Импортируем экшены и селекторы, которые были созданы и экспортированы  в файле со слайсом
+import { counterActions, counterSelectors } from "store/redux/counter/counterSlice";
 
-const Counter: React.FC<CounterProps> = ({ initialCount = 0 }) => {
-  const [count, setCount] = useState<number>(initialCount);
+function Counter() {
+  // 11. Забираем значение каунтера из store
+  const counter = useAppSelector(counterSelectors.counterValue)
 
-  const increment = () => {
-    setCount((prev) => prev + 1);
-  };
+  //12. Получаем функцию dispatch, которую возвращает хук useDispatch
+  const dispatch = useAppDispatch()
 
-  const decrement = () => {
-    setCount((prev) => prev - 1);
-  };
+  const onMinus = ()=>{
+    //13. Диспатчим экшен (передаём в вызов функции dispatch необходим идентификатор действия(action))
+    dispatch(counterActions.minus())
+  }
+
+  const onPlus = ()=>{
+    //13. Диспатчим экшен (передаём в вызов функции dispatch необходим идентификатор действия(action))
+    dispatch(counterActions.plus())
+  }
 
   return (
     <CounterWrapper>
-      <CounterTitle>Counter: {count}</CounterTitle>
-      <CounterButtons>
-        <CounterButton onClick={decrement}>-</CounterButton>
-        <CounterButton onClick={increment}>+</CounterButton>
-      </CounterButtons>
+      <ButtonWrapper>
+        <Button name="-" type="button" onClick={onMinus} />
+      </ButtonWrapper>
+      <ResultContainer>{counter}</ResultContainer>
+      <ButtonWrapper>
+        <Button name="+" type="button" onClick={onPlus} />
+      </ButtonWrapper>
     </CounterWrapper>
   );
-};
+}
 
 export default Counter;

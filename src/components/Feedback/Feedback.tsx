@@ -1,103 +1,46 @@
-/** @jsxImportSource @emotion/react */
-import React, { useState, useCallback, memo, useEffect } from 'react';
+
+import { useState } from "react";
+
+import Button from "components/Button/Button";
 import {
-  ContainerStyle,
-  TitleStyle,
-  StatItemStyle,
-  StatCountStyle,
-  StatLabelStyle,
-  ActionsStyle,
-  ResetSectionStyle,
-  LikeButtonStyle,
-  DislikeButtonStyle,
-  ResetButtonStyle,
-  FeedbackWrapper,
-  StatsStyle,
-} from './styles';
-import { LikeIcon, DislikeIcon, ResetIcon } from './IconsFeedback';
-import type { FeedbackProps } from './types';
+  FeedbackContainer,
+  FeedbackResultContainer,
+  LikeDislikeContainer,
+  Result
+} from "./styles";
 
-const Feedback: React.FC<FeedbackProps> = ({
-  title = 'Feedback',
-  initialLikes = 0,
-  initialDislikes = 0,
-  theme = 'light',
-  onReaction,
-}) => {
-  const [likes, setLikes] = useState(initialLikes);
-  const [dislikes, setDislikes] = useState(initialDislikes);
-  const [isAnimating, setIsAnimating] = useState(false);
+function Feedback() {
+  const [likes, setLikes] = useState(0);
+  const [dislikes, setDislikes] = useState(0);
 
-  const handleReaction = useCallback(
-    (type: 'like' | 'dislike' | 'reset') => {
-      if (isAnimating) return;
-      setIsAnimating(true);
+  const addLike = (): void => {
+    setLikes(likes + 1);
+  };
 
-      if (type === 'like') {
-        setLikes((prev) => prev + 1);
-      } else if (type === 'dislike') {
-        setDislikes((prev) => prev + 1);
-      } else {
-        setLikes(initialLikes);
-        setDislikes(initialDislikes);
-      }
+  const addDislike = (): void => {
+    setDislikes(dislikes + 1);
+  };
 
-      onReaction?.(type);
-
-      setTimeout(() => {
-        setIsAnimating(false);
-      }, 100);
-    },
-    [initialLikes, initialDislikes, isAnimating, onReaction]
-  );
-
-  useEffect(() => {
-    setLikes(initialLikes);
-    setDislikes(initialDislikes);
-  }, [initialLikes, initialDislikes]);
+  const resetResults = (): void => {
+    setLikes(0);
+    setDislikes(0);
+  };
 
   return (
-    <FeedbackWrapper>
-      <ContainerStyle theme={theme}>
-        <TitleStyle>{title}</TitleStyle>
-        <StatsStyle>
-          <StatItemStyle>
-            <StatCountStyle>{likes}</StatCountStyle>
-            <StatLabelStyle>Likes</StatLabelStyle>
-          </StatItemStyle>
-          <StatItemStyle>
-            <StatCountStyle>{dislikes}</StatCountStyle>
-            <StatLabelStyle>Dislikes</StatLabelStyle>
-          </StatItemStyle>
-        </StatsStyle>
-        <ActionsStyle>
-          <LikeButtonStyle
-            onClick={() => handleReaction('like')}
-            disabled={isAnimating}
-          >
-            <LikeIcon />
-            <StatLabelStyle>Like</StatLabelStyle>
-          </LikeButtonStyle>
-          <DislikeButtonStyle
-            onClick={() => handleReaction('dislike')}
-            disabled={isAnimating}
-          >
-            <DislikeIcon />
-            <StatLabelStyle>Dislike</StatLabelStyle>
-          </DislikeButtonStyle>
-        </ActionsStyle>
-        <ResetSectionStyle>
-          <ResetButtonStyle
-            onClick={() => handleReaction('reset')}
-            disabled={isAnimating}
-          >
-            <ResetIcon />
-            <StatLabelStyle>Reset</StatLabelStyle>
-          </ResetButtonStyle>
-        </ResetSectionStyle>
-      </ContainerStyle>
-    </FeedbackWrapper>
+    <FeedbackContainer>
+      <FeedbackResultContainer>
+        <LikeDislikeContainer>
+          <Result>Понравилось: {likes}</Result>
+          <Button  name="LIKE" type="button" onClick={addLike} />
+        </LikeDislikeContainer>
+        <LikeDislikeContainer>
+          <Result>Непонравилось: {dislikes}</Result>
+          <Button name="DISLIKE" type="button" onClick={addDislike} />
+        </LikeDislikeContainer>
+      </FeedbackResultContainer>
+      <Button name="RESET RESULTS" type="submit" onClick={resetResults} />
+    </FeedbackContainer>
   );
-};
+}
 
-export default memo(Feedback);
+export default Feedback;
