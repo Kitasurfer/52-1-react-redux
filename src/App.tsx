@@ -1,19 +1,18 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Provider } from 'react-redux'
-import store from './store/store'
 import GlobalStyles from './styles/GlobalStyles'
 
 //lessons
 import Lesson17 from 'lessons/Lesson17/Lesson17'
+import Lesson18 from 'lessons/Lesson18/Lesson18'
 import Layout from 'components/pages/UsersApp/Layout/Layout'
 import Home from 'components/pages/UsersApp/Home/Home'
-import Users from 'components/pages/UsersApp/Users/Users'
 
 //homeworks
 import Homework17 from 'homeworks/Homework17/Homework17'
 
 //feedback
 import Feedback from 'components/Feedback/Feedback'
+import Users from 'components/pages/UsersApp/Users/Users'
 //consultations
 
 {/* <Lesson17 /> */}
@@ -31,6 +30,7 @@ const App = () => {
 					<Route path='/Feedback' element={<Feedback />} />
 					
           <Route path='/Homework17' element={<Homework17 />} />
+					<Route path='/Lesson18' element={<Lesson18 />} />
 					
           <Route path='*' element='Page not found'/>
         </Routes>
