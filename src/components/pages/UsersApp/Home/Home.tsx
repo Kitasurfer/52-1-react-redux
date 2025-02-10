@@ -49,7 +49,7 @@ function Home() {
           label="Job title"
           onChange={formik.handleChange}
         />
-        <Button name="Create" type="submit" />
+        <Button name="Create" type="submit" disabled={!formik.isValid} onClick={() => formik.submitForm()} />
       </UserForm>
     </HomePageWrapper>
   )
