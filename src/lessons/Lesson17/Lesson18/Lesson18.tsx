@@ -1,5 +1,5 @@
-import Input from "components/Input/Input"
-import Button from "components/Button/Button"
+import Input from "../../../components/Input/Input"
+import Button from "../../../components/Button/Button"
 
 import { HomePageWrapper, UserForm, UserFormName } from "./styles"
 import { useFormik } from "formik"
@@ -49,7 +49,7 @@ function Home() {
           label="Job title"
           onChange={formik.handleChange}
         />
-        <Button name="Create" type="submit" disabled={!formik.isValid} onClick={() => formik.submitForm()} />
+        <Button name="Create" type="submit" />
       </UserForm>
     </HomePageWrapper>
   )

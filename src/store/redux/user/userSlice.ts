@@ -19,6 +19,5 @@ export const userSlice = createAppSlice({
   }
 })
 
-export const userReducer = userSlice.reducer;
 export const usersActions = userSlice.actions
 export const usersSelectors = userSlice.selectors

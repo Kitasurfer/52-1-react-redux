@@ -67,12 +67,12 @@ function Layout({ children }: LayoutProps) {
         <HeaderLogoContainer onClick={goToHomePage}>
           <HeaderLogo src={Logo}/>
         </HeaderLogoContainer>
-        <FooterNavContainer>
+        {/* <FooterNavContainer>
           <StyledLink to="/">Home</StyledLink>
           <StyledLink to="/users">Users</StyledLink>
 					<StyledLink to="/Feedback">Feedback</StyledLink>
 					<StyledLink to="/lesson18">Lesson 18</StyledLink>
-        </FooterNavContainer>
+        </FooterNavContainer> */}
       </Footer>
     </LayoutWrapper>
   )
