@@ -1,54 +1,52 @@
-import styled from '@emotion/styled';
-
-
+import styled from "@emotion/styled";
 
 export const FeedbackContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 20px;
   padding: 20px;
-  background-color: #f0f0f0;
   border: 1px solid #ccc;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  max-width: 400px;
+  margin: 0 auto;
 `;
 
 export const FeedbackResultContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 10px;
   width: 100%;
-  padding: 10px;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 `;
 
 export const LikeDislikeContainer = styled.div`
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  margin: 10px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  gap: 10px;
 `;
 
 export const Result = styled.span`
   font-size: 18px;
   font-weight: bold;
-  margin-right: 10px;
 `;
 
 export const Button = styled.button`
-  padding: 10px 20px;
-  border: none;
-  border-radius: 10px;
-  background-color: #4CAF50;
-  color: #fff;
-  cursor: pointer;
+	width: 100%;
+	min-height: 50px;
+	outline: none;
+	border: none;
+	padding: 10px;
+	background: #1f27f5;
+	border-radius: 4px;
+	color: white;
+	font-family: Lato, Geneva, Tahoma, sans-serif;
+	font-size: 16px;
+	cursor: pointer;
+`;
 
-  &:hover {
-    background-color: #3e8e41;
-  }
+export const ErrorMessage = styled.div`
+	height: 18px;
+	color: red;
+	font-size: 14px;
 `;
