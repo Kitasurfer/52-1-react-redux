@@ -13,8 +13,7 @@ import {
   StyledLink,
   FooterNavContainer,
 } from "./styles"
-import Logo from 'assets/logo.png';
-
+import Logo from "assets/logo.png"
 
 function Layout({ children }: LayoutProps) {
   const navigate = useNavigate()
@@ -25,7 +24,7 @@ function Layout({ children }: LayoutProps) {
     <LayoutWrapper>
       <Header>
         <HeaderLogoContainer onClick={goToHomePage}>
-          <HeaderLogo src={Logo}/>
+          <HeaderLogo src={Logo} />
         </HeaderLogoContainer>
         <NavContainer>
           <StyledNavLink
@@ -44,15 +43,15 @@ function Layout({ children }: LayoutProps) {
           >
             Users
           </StyledNavLink>
-					<StyledNavLink
-						style={({ isActive }) => ({
-							textDecoration: isActive ? "underline" : "none",
-						})}
-						to="/Feedback"
-					>
-						Feedback
-					</StyledNavLink>
-					<StyledNavLink
+          <StyledNavLink
+            style={({ isActive }) => ({
+              textDecoration: isActive ? "underline" : "none",
+            })}
+            to="/Feedback"
+          >
+            Feedback
+          </StyledNavLink>
+          <StyledNavLink
             style={({ isActive }) => ({
               textDecoration: isActive ? "underline" : "none",
             })}
@@ -60,12 +59,20 @@ function Layout({ children }: LayoutProps) {
           >
             Lesson 18
           </StyledNavLink>
+          <StyledNavLink
+            to="/advice"
+            style={({ isActive }) => ({
+              textDecoration: isActive ? "underline" : "none",
+            })}
+          >
+            Advice Randomizer
+          </StyledNavLink>
         </NavContainer>
       </Header>
       <Main>{children}</Main>
       <Footer>
         <HeaderLogoContainer onClick={goToHomePage}>
-          <HeaderLogo src={Logo}/>
+          <HeaderLogo src={Logo} />
         </HeaderLogoContainer>
         {/* <FooterNavContainer>
           <StyledLink to="/">Home</StyledLink>
