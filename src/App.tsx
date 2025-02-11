@@ -12,7 +12,7 @@ import Lesson18 from 'lessons/Lesson18/Lesson18'
 //homeworks
 import Homework17 from 'homeworks/Homework17/Homework17'
 import Feedback from 'components/Feedback/Feedback'
-import AdviceRandomizer from 'components/AdviceRandomizer/AdviceRandomizer'
+import Homework18 from 'homeworks/Homework18/Homework18'
 
 //consultations
 
@@ -30,7 +30,7 @@ const App = () => {
           <Route path='/homework17' element={<Homework17 />} />
 					<Route path='/Feedback' element={<Feedback />} />
           <Route path='/lesson18' element={<Lesson18 />} />
-					<Route path="/advice" element={<AdviceRandomizer />} />
+					<Route path="/homework18" element={<Homework18 />} />
           <Route path='*' element='Page not found' />
         </Routes>
       </Layout>

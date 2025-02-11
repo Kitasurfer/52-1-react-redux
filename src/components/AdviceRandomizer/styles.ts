@@ -36,3 +36,7 @@ export const AdviceText = styled.p`
   padding: 10px;
   border-bottom: 1px solid #eee;
 `;
+
+export const ErrorMessage = styled.div`
+	color: red;
+`

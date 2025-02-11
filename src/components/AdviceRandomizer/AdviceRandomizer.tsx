@@ -7,6 +7,7 @@ import {
   AdviceContainer,
   AdviceRandomizerWrapper,
   AdviceText,
+  ErrorMessage
 } from "./styles";
 
 function AdviceRandomizer() {
@@ -21,6 +22,12 @@ function AdviceRandomizer() {
     dispatch(adviceActions.deleteAllAdvices());
   };
 
+  const loadingMessage = status === "loading" && "Loading advice...";
+  const errorMessage = error && <ErrorMessage>Error: {error}</ErrorMessage>;
+  const deleteAllButton = data.length > 0 && (
+    <Button name="DELETE ALL ADVICES" onClick={handleDeleteAll} />
+  );
+
   return (
     <AdviceRandomizerWrapper>
       <AdviceCard>
@@ -29,16 +36,14 @@ function AdviceRandomizer() {
           onClick={handleGetAdvice} 
           disabled={status === "loading"}
         />
-        {status === "loading" && <p>Loading advice...</p>}
-        {error && <p style={{ color: "red" }}>Error: {error}</p>}
+        {loadingMessage}
+        {errorMessage}
         <AdviceContainer>
           {data.map((advice) => (
             <AdviceText key={uuidv4()}>{advice}</AdviceText>
           ))}
         </AdviceContainer>
-        {data.length > 0 && (
-          <Button name="DELETE ALL ADVICES" onClick={handleDeleteAll} />
-        )}
+        {deleteAllButton}
       </AdviceCard>
     </AdviceRandomizerWrapper>
   );

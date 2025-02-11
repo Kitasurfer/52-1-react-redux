@@ -2,7 +2,7 @@ import { Middleware } from "@reduxjs/toolkit";
 import axios from "axios";
 import { adviceActions } from "./adviceSlice";
 
-export const adviceMiddleware: Middleware = (store) => (next) => (action) => {
+export const adviceMiddleware: Middleware = (store) => (next) => (action: any) => {
   if (action.type === adviceActions.getAdvice.type) {
     // Передаём действие дальше, чтобы редьюсер обновил состояние (например, установил "loading")
     next(action);
@@ -19,7 +19,7 @@ export const adviceMiddleware: Middleware = (store) => (next) => (action) => {
         }
         
       } catch (error) {
-        store.dispatch(adviceActions.getAdviceFailure(error.message));
+        store.dispatch(adviceActions.getAdviceFailure((error as Error).message));
       }
     })();
 
