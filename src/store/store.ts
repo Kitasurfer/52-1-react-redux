@@ -5,33 +5,39 @@ import { counterSlice } from "./redux/counter/counterSlice"
 import { userSlice } from "./redux/user/userSlice"
 import { feedbackSlice } from "./redux/feedback/feedbackSlice"
 import { randomJokesSlice } from "./redux/randomJokes/randomJokesSlice"
+import { adviceSlice } from "./redux/advice/adviceSlice" 
+import { adviceMiddleware } from "./redux/advice/adviceMiddleware" 
 
-// `combineSlices` automatically combines the reducers using
-// their `reducerPath`s, therefore we no longer need to call `combineReducers`.
 
-// 8. Передаём созданные слайсы в combineSlices
-const rootReducer = combineSlices(counterSlice, userSlice, feedbackSlice, randomJokesSlice)
-// Infer the `RootState` type from the root reducer
+// combineSlices автоматически комбинирует редьюсеры используя их reducerPath (обычно это name слайса)
+const rootReducer = combineSlices(
+  counterSlice, 
+  userSlice, 
+  feedbackSlice, 
+  randomJokesSlice, 
+  adviceSlice
+)
+
+// Определяем тип глобального стейта
 export type RootState = ReturnType<typeof rootReducer>
 
-// The store setup is wrapped in `makeStore` to allow reuse
-// when setting up tests that need the same store config
+// Функция для создания store (удобно для тестирования)
 export const makeStore = (preloadedState?: Partial<RootState>) => {
   const store = configureStore({
     reducer: rootReducer,
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().concat(adviceMiddleware),
     preloadedState,
   })
-  // configure listeners using the provided defaults
-  // optional, but required for `refetchOnFocus`/`refetchOnReconnect` behaviors
+  // Настраиваем слушатели (setupListeners) для RTK Query (например, для refetchOnFocus)
   setupListeners(store.dispatch)
   return store
 }
 
 export const store = makeStore()
 
-// Infer the type of `store`
+// Определяем типы для store, dispatch и thunk
 export type AppStore = typeof store
-// Infer the `AppDispatch` type from the store itself
 export type AppDispatch = AppStore["dispatch"]
 export type AppThunk<ThunkReturnType = void> = ThunkAction<
   ThunkReturnType,
